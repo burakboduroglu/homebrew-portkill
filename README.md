@@ -7,6 +7,13 @@ This repository contains the Homebrew Formula for [portkill](https://github.com/
 ```bash
 brew tap burakboduroglu/portkill
 brew install portkill
+portkill --version
+```
+
+You can also install without a separate tap step:
+
+```bash
+brew install burakboduroglu/portkill/portkill
 ```
 
 ## Upgrade
@@ -14,6 +21,24 @@ brew install portkill
 ```bash
 brew update
 brew upgrade portkill
+```
+
+## npm Global Install Conflict
+
+If `portkill` was previously installed with npm, Homebrew may report that `/opt/homebrew/bin/portkill` already exists.
+
+Remove the npm global install, then link the Homebrew formula:
+
+```bash
+npm uninstall -g @burakboduroglu/portkill
+brew link portkill
+portkill --version
+```
+
+Or inspect the files Homebrew would overwrite:
+
+```bash
+brew link --overwrite portkill --dry-run
 ```
 
 ## Release Checklist
