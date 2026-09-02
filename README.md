@@ -41,20 +41,31 @@ Or inspect the files Homebrew would overwrite:
 brew link --overwrite portkill --dry-run
 ```
 
-## Release Checklist
+## Updating the formula
 
-1. Publish the npm package in the `portkill` app repository.
-2. Publish a GitHub Release on `burakboduroglu/portkill` with a tag like `v0.4.5`.
-3. Upload the npm package tarball as `portkill-0.4.5.tgz` to that release.
-4. Update `Formula/portkill.rb` with the new `version`, URL, and `sha256`.
-5. Update npm runtime resources if dependencies changed.
-6. Run `brew audit --strict --online burakboduroglu/portkill/portkill`.
-7. Run `brew install burakboduroglu/portkill/portkill`.
-8. Commit and push this tap repository.
+Releases are cut in the [portkill](https://github.com/burakboduroglu/portkill)
+repository: pushing a `vX.Y.Z` tag runs a workflow that publishes to npm,
+creates the GitHub release, and attaches the tarball as `portkill-X.Y.Z.tgz`.
 
-To calculate checksums:
+That workflow's run summary prints the two lines this formula needs. Copy them
+into `Formula/portkill.rb`:
+
+```ruby
+  url "https://github.com/burakboduroglu/portkill/releases/download/vX.Y.Z/portkill-X.Y.Z.tgz"
+  sha256 "..."
+```
+
+Then update the `chalk` and `commander` resources if either moved, and check the
+formula before pushing:
 
 ```bash
-shasum -a 256 portkill-0.4.5.tgz
-shasum -a 256 chalk-5.6.2.tgz commander-13.1.0.tgz
+brew audit --strict --online burakboduroglu/portkill/portkill
+brew install burakboduroglu/portkill/portkill
+portkill --version
+```
+
+To compute a checksum by hand:
+
+```bash
+shasum -a 256 portkill-X.Y.Z.tgz
 ```
