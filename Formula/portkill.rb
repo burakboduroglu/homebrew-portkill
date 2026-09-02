@@ -1,8 +1,8 @@
 class Portkill < Formula
   desc "Kill processes listening on TCP ports"
   homepage "https://github.com/burakboduroglu/portkill"
-  url "https://github.com/burakboduroglu/portkill/releases/download/v0.4.5/portkill-0.4.5.tgz"
-  sha256 "c91cc764f8001411a120ac68bcf70f1a4916b7320868c722d3e1227ffe9920da"
+  url "https://github.com/burakboduroglu/portkill/releases/download/v0.4.6/portkill-0.4.6.tgz"
+  sha256 "d16926d701737f196ec33fa7a4502675eb128d4492c288d2c05586a041161d33"
   license "MIT"
 
   depends_on "node"
